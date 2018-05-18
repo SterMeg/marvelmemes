@@ -1,0 +1,55 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.wrapper {
+    max-width: 1070px;
+    margin: 0 auto;
+}
+
+.img-container {
+    border: 2px solid black;
+}
+
+.joke-card {
+    border: 2px solid black;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.joke-display {
+    position: relative;
+    flex-basis: 400px;
+    p {
+        top: 30%;
+        transform: translateY(-50%);
+        letter-spacing: 1px;
+        padding: 0 60px;
+        position: absolute;
+    }
+}
