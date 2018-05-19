@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import md5 from 'js-md5';
+import Header from './Header';
+import QuotePicker from './QuotePicker';
 
 //When user inputs a character name and submits search, app either returns image of character from Marvel API or informs user that character is not found
 //When image is returned, also return a random dad joke & display with image
@@ -29,7 +31,16 @@ class App extends React.Component {
       character: [],
       joke: [],
       image: [],
-      imageLink: '../../public/assets/placeholder-01.png'
+      imageLink: '../../public/assets/placeholder-01.png',
+      quoteArray: [
+        '../../public/assets/border-1.png',
+        '../../public/assets/border-2.png',
+        '../../public/assets/border-3.png',
+        '../../public/assets/border-4.png',
+        '../../public/assets/border-5.png',
+        '../../public/assets/border-6.png'
+      ],
+      selectedQuote: '../../public/assets/border-1.png'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +50,7 @@ class App extends React.Component {
   getData(searchName) {
     const publicKey = 'bd988d67cbbfa81ae1862106e92ce369';
     const privateKey = 'b83fae372f4c802d745fbe837e58e7cdc7f9ec33';
-    const timeStamgp = Math.floor(Date.now());
+    const timeStamp = Math.floor(Date.now());
     const stringToHash = timeStamp + privateKey + publicKey;
     const hash = md5(stringToHash);
 
@@ -120,22 +131,33 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <h1>Marvel at my dad jokes!</h1>
-        <form action="" onSubmit={this.handleSubmit}>
-          <input type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Enter character name" />
-          <input type="submit" value="Get joke" />
-        </form>
-        <div className="joke-card">
-          <div className="img-container">
-            <img src={this.state.imageLink} alt=""/>
-          </div>
-          <div className="joke-display">
-            <img src="../../public/assets/speechbubble.svg" alt=""/>
-            <p>{this.state.joke}</p>
+    <div>
+      <Header />
+      <div className='joke-design'>
+        <div className="wrapper">
+          <form action="" onSubmit={this.handleSubmit}>
+            <label htmlFor="search">Enter a Marvel character!</label>
+            <input type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Enter character name" />
+            <input type="submit" value="Give me a joke!" />
+          </form>
+          <div className="joke-container">
+            <div className="joke-card">
+              <img className="selected-quote" src={this.state.selectedQuote} alt=""/>
+              <div className="img-container">
+                <img src={this.state.imageLink} alt=""/>
+              </div>
+              <div className="joke-display">
+                <p>{this.state.joke}</p>
+              </div>
+            </div>
+            <QuotePicker
+              onQuoteSelect={selectedQuote => this.setState({selectedQuote})}
+              speechBubble={this.state.quoteArray}
+            />
           </div>
         </div>
       </div>
+    </div>
     )
   }
 }
