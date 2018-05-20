@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const LandingPage = () => {
     return (
         <header>
             <div className="wrapper">
@@ -14,10 +15,10 @@ const Header = () => {
                 </div>
                 <p>Choose your character! Get a dad joke!</p>
                 <p>Customize your joke card!</p>
-                <button>Let's Do It!</button>
+                <Link to ="/joke-generator">Let's Do It!</Link>
             </div>
         </header>
     )
 }
 
-export default Header;
+export default LandingPage;
