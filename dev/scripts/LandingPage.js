@@ -15,7 +15,7 @@ const LandingPage = () => {
                 </div>
                 <p>Choose your character! Get a dad joke!</p>
                 <p>Customize your joke card!</p>
-                <Link to ="/joke-generator">Let's Do It!</Link>
+                <Link to ="/joke-generator" className="button">Let's Do It!</Link>
             </div>
         </header>
     )

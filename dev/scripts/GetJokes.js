@@ -2,14 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import md5 from 'js-md5';
+import { SketchPicker } from 'react-color';
 import {Link
 } from 'react-router-dom';
+import reactCSS from 'reactcss';
 import QuotePicker from './QuotePicker';
 
 class GetJokes extends React.Component {
     constructor() {
         super();
         this.state = {
+            background: '#eee',
             search: '',
             character: [],
             joke: [],
@@ -28,6 +31,7 @@ class GetJokes extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeComplete = this.handleChangeComplete.bind(this);
     }
     // 
     getData(searchName) {
@@ -105,6 +109,15 @@ class GetJokes extends React.Component {
         });
     }
 
+    handleChangeComplete (color) {
+        console.log(color);
+        this.setState({ 
+            background: color.hex 
+        });
+    };
+
+
+
     //Take data returned from Marvel's image data & build full URL string
     createImageLink(image) {
         const imageURL = image.path;
@@ -118,6 +131,9 @@ class GetJokes extends React.Component {
     }
 
     render() {
+        // const cardStyle = {
+        //             background: 'blue'
+        //         };
         return (
             <main className='joke-design'>
                 <div className="wrapper">
@@ -126,8 +142,12 @@ class GetJokes extends React.Component {
                         <input type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Enter character name" />
                         <input type="submit" value="Give me a joke!" />
                     </form>
-                    <div className="joke-container">
-                        <div className="joke-card">
+                    <div className="jokeContainer">
+                        <SketchPicker 
+                            color={this.state.background}
+                            onChangeComplete={this.handleChangeComplete}
+                        />
+                        <div style={{ background: `${this.state.background}` }} className="joke-card">
                             <img className="selected-quote" src={this.state.selectedQuote} alt="" />
                             <div className="img-container">
                                 <img src={this.state.imageLink} alt="" />

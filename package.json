@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "js-md5": "^0.7.3",
-    "node-sass": "^4.7.1"
+    "node-sass": "^4.7.1",
+    "react-color": "^2.14.1",
+    "reactcss": "^1.2.3"
   }
 }
