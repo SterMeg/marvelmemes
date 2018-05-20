@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import md5 from 'js-md5';
-import { SketchPicker } from 'react-color';
+import { SliderPicker } from 'react-color';
 import FontPicker from 'font-picker-react';
 import {Link
 } from 'react-router-dom';
@@ -151,19 +151,21 @@ class GetJokes extends React.Component {
                             </div>
                         </div>
                         <div className="sidebar">
-                            <FontPicker
-                                apiKey="AIzaSyCOaVlIvABcHc2Sda_GDclxI1ZCvWUiVj8"
-                                activeFont={this.state.activeFont}
-                                onChange={nextFont => this.setState({ activeFont: nextFont.family })}
-                                />
-                            <p>Choose your font</p>
-                            <div className="colour-container">
-                                <SketchPicker
-                                    color={this.state.background}
-                                    onChangeComplete={this.handleChangeComplete}
-                                    />
-                                <p>Choose your background</p>
-                            </div>
+                                <div className="font-container">
+                                    <FontPicker
+                                        apiKey="AIzaSyCOaVlIvABcHc2Sda_GDclxI1ZCvWUiVj8"
+                                        activeFont={this.state.activeFont}
+                                        onChange={nextFont => this.setState({ activeFont: nextFont.family })}
+                                        />
+                                    <p>Choose your font</p>
+                                </div>
+                                <div className="colour-container">
+                                    <SliderPicker
+                                        color={this.state.background}
+                                        onChangeComplete={this.handleChangeComplete}
+                                        />
+                                    <p>Choose your background</p>
+                                </div>
                             <QuotePicker
                                 onQuoteSelect={selectedQuote => this.setState({ selectedQuote })}
                                 speechBubble={this.state.quoteArray}

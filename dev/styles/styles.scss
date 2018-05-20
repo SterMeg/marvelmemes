@@ -181,8 +181,9 @@ form {
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 40px 0;
-    @media (max-width: 743px) {
-        flex-wrap: wrap;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
 
@@ -192,6 +193,9 @@ form {
     flex-basis: 800px;
     justify-content: center;
     padding: 60px;
+    @media (max-width: 900px) {
+        flex-basis: auto;
+    }
     @media (max-width: 743px) {
         padding: 60px 40px;
     }
@@ -207,8 +211,22 @@ form {
     flex-basis: 200px;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
     p {
         margin: 5px 0  10px 0;
+    }
+    @media (max-width: 900px) {
+        flex-direction: row;
+        margin: 20px 0 0 0;
+        align-items: stretch;
+        flex-basis: auto;
+    }
+    @media (max-width: 618px) {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    @media (max-width: 451px) {
+        justify-content: center;
     }
 }
 
@@ -265,10 +283,30 @@ form {
 .quote-picker-container {
     flex-basis: 100px;
     text-align: center;
-    @media (max-width: 743px) {
+    @media (max-width: 900px) {
         flex-direction: column;
         flex-basis: auto;
-        margin-left: 0;
+        margin: 0 20px 0;
+    }
+    @media (max-width: 618px) {
+        margin: 0;
+    }
+}
+
+.font-container,
+.colour-container {
+    margin-bottom: 20px;
+    @media (max-width: 900px){
+        margin: 0;
+    }
+}
+
+.colour-container {
+    @media (max-width:900px) {
+        order: 1;
+    }
+    @media (max-width: 618px) {
+        order: 0;
     }
 }
 .quote-picker {
@@ -278,7 +316,8 @@ form {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    @media (max-width: 743px) {
+    @media (max-width: 900px) {
+        flex-wrap: nowrap;
         display: flex;
         flex-grow: 1;
         margin-left: 0;
@@ -292,16 +331,25 @@ form {
         flex-grow: 1;
         padding: 10px;
         border-left: 2px solid black;
-        @media (max-width: 743px) {
+        @media (max-width: 900px) {
             border-top: none;
         }
         &:nth-child(3n + 1) {
             border-left: none;
-            @media (max-width: 743px) {
+            @media (max-width: 900px) {
+                border-left: 2px solid black;
             }
         }
         &:nth-child(-n + 3) {
             border-bottom: 2px solid black;
+            @media (max-width: 900px) {
+                border-bottom: none;
+            }
+        }
+        &:first-child {
+            @media (max-width: 900px) {
+                border-left: none;
+            }
         }
         &:hover{
             background: #e4ff1a;
