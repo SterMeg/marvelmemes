@@ -11,10 +11,10 @@ const QuotePicker = (props) => {
     });
     return (
         <div className = "quote-picker-container">
-            <p>Choose your frame</p>
             <ul className="quote-picker">
                 {quoteItems}
             </ul>
+            <p>Choose your frame</p>
         </div>
     )
 };

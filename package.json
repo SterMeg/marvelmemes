@@ -30,9 +30,9 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "font-picker-react": "^2.0.3",
     "js-md5": "^0.7.3",
     "node-sass": "^4.7.1",
-    "react-color": "^2.14.1",
-    "reactcss": "^1.2.3"
+    "react-color": "^2.14.1"
   }
 }

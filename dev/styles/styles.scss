@@ -175,11 +175,12 @@ form {
     }
 }
 
-.jokeContainer {
+.joke-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-between;
     margin-bottom: 20px;
+    padding: 40px 0;
     @media (max-width: 743px) {
         flex-wrap: wrap;
     }
@@ -197,6 +198,17 @@ form {
     @media (max-width: 618px) {
         flex-wrap: wrap;
         padding: 40px 30px;
+    }
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 200px;
+    justify-content: center;
+    align-items: center;
+    p {
+        margin: 5px 0  10px 0;
     }
 }
 
@@ -252,7 +264,6 @@ form {
 
 .quote-picker-container {
     flex-basis: 100px;
-    margin-left: 20px;
     text-align: center;
     @media (max-width: 743px) {
         flex-direction: column;
@@ -263,26 +274,34 @@ form {
 .quote-picker {
     border: 2px solid black;
     list-style: none;
-    margin-left: 10px;
+    margin:0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
     @media (max-width: 743px) {
         display: flex;
         flex-grow: 1;
         margin-left: 0;
     }
+    p {
+        margin-bottom: 0;
+    }
     li {
         cursor: pointer;
+        flex-basis: 60px;
+        flex-grow: 1;
         padding: 10px;
-        border-top: 2px solid black;
+        border-left: 2px solid black;
         @media (max-width: 743px) {
             border-top: none;
-            border-left: 2px solid black;
         }
-        &:first-child {
-            border-top: none;
+        &:nth-child(3n + 1) {
+            border-left: none;
             @media (max-width: 743px) {
-                border-left: none;
             }
+        }
+        &:nth-child(-n + 3) {
+            border-bottom: 2px solid black;
         }
         &:hover{
             background: #e4ff1a;

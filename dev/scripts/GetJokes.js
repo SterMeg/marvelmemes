@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import md5 from 'js-md5';
 import { SketchPicker } from 'react-color';
+import FontPicker from 'font-picker-react';
 import {Link
 } from 'react-router-dom';
-import reactCSS from 'reactcss';
 import QuotePicker from './QuotePicker';
 
 class GetJokes extends React.Component {
     constructor() {
         super();
         this.state = {
+            activeFont: 'Comfortaa',
             background: '#eee',
             search: '',
             character: [],
@@ -131,9 +132,6 @@ class GetJokes extends React.Component {
     }
 
     render() {
-        // const cardStyle = {
-        //             background: 'blue'
-        //         };
         return (
             <main className='joke-design'>
                 <div className="wrapper">
@@ -142,24 +140,35 @@ class GetJokes extends React.Component {
                         <input type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Enter character name" />
                         <input type="submit" value="Give me a joke!" />
                     </form>
-                    <div className="jokeContainer">
-                        <SketchPicker 
-                            color={this.state.background}
-                            onChangeComplete={this.handleChangeComplete}
-                        />
+                    <div className="joke-container">
                         <div style={{ background: `${this.state.background}` }} className="joke-card">
                             <img className="selected-quote" src={this.state.selectedQuote} alt="" />
                             <div className="img-container">
                                 <img src={this.state.imageLink} alt="" />
                             </div>
                             <div className="joke-display">
-                                <p>{this.state.joke}</p>
+                                <p className="apply-font">{this.state.joke}</p>
                             </div>
                         </div>
-                        <QuotePicker
-                            onQuoteSelect={selectedQuote => this.setState({ selectedQuote })}
-                            speechBubble={this.state.quoteArray}
-                        />
+                        <div className="sidebar">
+                            <FontPicker
+                                apiKey="AIzaSyCOaVlIvABcHc2Sda_GDclxI1ZCvWUiVj8"
+                                activeFont={this.state.activeFont}
+                                onChange={nextFont => this.setState({ activeFont: nextFont.family })}
+                                />
+                            <p>Choose your font</p>
+                            <div className="colour-container">
+                                <SketchPicker
+                                    color={this.state.background}
+                                    onChangeComplete={this.handleChangeComplete}
+                                    />
+                                <p>Choose your background</p>
+                            </div>
+                            <QuotePicker
+                                onQuoteSelect={selectedQuote => this.setState({ selectedQuote })}
+                                speechBubble={this.state.quoteArray}
+                                />
+                        </div>
                     </div>
                 </div>
             </main>
