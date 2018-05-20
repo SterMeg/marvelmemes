@@ -101,6 +101,9 @@ form {
     display: flex;
     justify-content: center;
     padding: 20px 0;
+    @media (max-width: 743px) {
+        flex-wrap: wrap;
+    }
     label {
         padding: 20px;
         font-size: 20px;
@@ -114,14 +117,23 @@ form {
         padding: 20px;
         border: 2px solid #474a48;
         border-right: none;
+        @media (max-width: 743px) {
+            border-right: 2px solid #474a48;
+            }
+        }
+    input[type=submit] {
+        @media (max-width: 743px) {
+        flex-grow: 1;
+        margin-top: 4px;
         }
     }
+}
 
 .wrapper {
     max-width: 1070px;
     margin: 0 auto;
-    @media (max-width: 1110px) {
-        padding: 40px;
+    @media (max-width: 1090px) {
+        padding: 20px;
     }
 }
 
@@ -152,6 +164,14 @@ form {
 
 .img-container {
     border: 2px solid black;
+    object-fit: cover;
+    @media (max-width: 618px) {
+        order: 1;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .joke-container {
@@ -159,6 +179,9 @@ form {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    @media (max-width: 743px) {
+        flex-wrap: wrap;
+    }
 }
 
 .joke-card {
@@ -166,7 +189,14 @@ form {
     display: flex;
     flex-basis: 800px;
     justify-content: center;
-    padding: 60px 100px;
+    padding: 60px;
+    @media (max-width: 743px) {
+        padding: 60px 40px;
+    }
+    @media (max-width: 618px) {
+        flex-wrap: wrap;
+        padding: 40px 30px;
+    }
 }
 
 .selected-quote {
@@ -181,6 +211,9 @@ form {
     flex-basis: 300px;
     align-self: flex-start;
     padding: 20px 0px 0px 60px;
+    @media (max-width: 618px){
+        padding: 0;
+    }
     p {
         letter-spacing: 1px;
         padding: 25px;
@@ -220,18 +253,35 @@ form {
     flex-basis: 100px;
     margin-left: 20px;
     text-align: center;
+    @media (max-width: 743px) {
+        flex-direction: column;
+        flex-basis: auto;
+        margin-left: 0;
+    }
 }
 .quote-picker {
     border: 2px solid black;
     list-style: none;
     margin-left: 10px;
     padding: 0;
+    @media (max-width: 743px) {
+        display: flex;
+        flex-grow: 1;
+        margin-left: 0;
+    }
     li {
         cursor: pointer;
         padding: 10px;
         border-top: 2px solid black;
+        @media (max-width: 743px) {
+            border-top: none;
+            border-left: 2px solid black;
+        }
         &:first-child {
             border-top: none;
+            @media (max-width: 743px) {
+                border-left: none;
+            }
         }
         &:hover{
             background: #e4ff1a;
