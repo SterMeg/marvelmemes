@@ -7,6 +7,7 @@ import FontPicker from 'font-picker-react';
 import {Link
 } from 'react-router-dom';
 import QuotePicker from './QuotePicker';
+import Footer from './Footer';
 
 class GetJokes extends React.Component {
     constructor() {
@@ -52,18 +53,18 @@ class GetJokes extends React.Component {
         })
             .then((res) => {
                 const charArray = res.data.data.results;
-
+                console.log(res);
                 //If no character data is returned, display "character not found"
                 if (charArray.length < 1) {
                     this.setState({
                         joke: 'This character was not found',
-                        imageLink: '../../public/assets/04.jpg'
+                        imageLink: '../../public/assets/placeholder-01.png'
                     })
                     //If charcter data returned, pass data to character and image states & call joke API
                 } else {
                     this.setState({
                         character: res.data.data.results[0],
-                        image: res.data.data.results[0].thumbnail
+                        image: res.data.data.results[0].thumbnail,
                     });
 
                     this.getJoke();
@@ -151,27 +152,28 @@ class GetJokes extends React.Component {
                             </div>
                         </div>
                         <div className="sidebar">
-                                <div className="font-container">
-                                    <FontPicker
-                                        apiKey="AIzaSyCOaVlIvABcHc2Sda_GDclxI1ZCvWUiVj8"
-                                        activeFont={this.state.activeFont}
-                                        onChange={nextFont => this.setState({ activeFont: nextFont.family })}
-                                        />
-                                    <p>Choose your font</p>
-                                </div>
-                                <div className="colour-container">
-                                    <SliderPicker
-                                        color={this.state.background}
-                                        onChangeComplete={this.handleChangeComplete}
-                                        />
-                                    <p>Choose your background</p>
-                                </div>
+                            <div className="font-container">
+                                <FontPicker
+                                    apiKey="AIzaSyCOaVlIvABcHc2Sda_GDclxI1ZCvWUiVj8"
+                                    activeFont={this.state.activeFont}
+                                    onChange={nextFont => this.setState({ activeFont: nextFont.family })}
+                                    />
+                                <p>Choose your font</p>
+                            </div>
+                            <div className="colour-container">
+                                <SliderPicker
+                                    color={this.state.background}
+                                    onChangeComplete={this.handleChangeComplete}
+                                    />
+                                <p>Choose your background</p>
+                            </div>
                             <QuotePicker
                                 onQuoteSelect={selectedQuote => this.setState({ selectedQuote })}
                                 speechBubble={this.state.quoteArray}
                                 />
                         </div>
                     </div>
+                    <Footer />
                 </div>
             </main>
         )
