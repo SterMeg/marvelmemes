@@ -60,7 +60,7 @@ class GetJokes extends React.Component {
         })
             .then((res) => {
                 const charArray = res.data.data.results;
-                console.log(res);
+                
                 //If no character data is returned, display "character not found"
                 if (charArray.length < 1) {
                     this.setState({
