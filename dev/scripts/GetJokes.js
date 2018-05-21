@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link
+} from 'react-router-dom';
 import axios from 'axios';
 import md5 from 'js-md5';
+
+//Installed components to allow user to choose font and color
 import { SliderPicker } from 'react-color';
 import FontPicker from 'font-picker-react';
-import {Link
-} from 'react-router-dom';
+
+//My components
+import SearchBar from  './SearchBar';
+import JokeCard from './JokeCard';
 import QuotePicker from './QuotePicker';
 import Footer from './Footer';
 
@@ -28,14 +34,15 @@ class GetJokes extends React.Component {
                 '../../public/assets/border-5.png',
                 '../../public/assets/border-6.png'
             ],
-            selectedQuote: '../../public/assets/border-1.png'
+            selectedQuote: '../../public/assets/border-1.png',
+            altInfo: 'A silhouette placeholder image'
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeComplete = this.handleChangeComplete.bind(this);
     }
-    // 
+    // Searches Marvel API for character data
     getData(searchName) {
         const publicKey = 'bd988d67cbbfa81ae1862106e92ce369';
         const privateKey = 'b83fae372f4c802d745fbe837e58e7cdc7f9ec33';
@@ -58,19 +65,34 @@ class GetJokes extends React.Component {
                 if (charArray.length < 1) {
                     this.setState({
                         joke: 'This character was not found',
-                        imageLink: '../../public/assets/placeholder-01.png'
+                        imageLink: '../../public/assets/placeholder-01.png',
+                        altInfo: 'A silhouette placeholder image'
                     })
                     //If charcter data returned, pass data to character and image states & call joke API
                 } else {
                     this.setState({
                         character: res.data.data.results[0],
                         image: res.data.data.results[0].thumbnail,
+                        altInfo: `An image of the Marvel character ${res.data.data.results[0].name}`
                     });
 
                     this.getJoke();
                     this.createImageLink(this.state.image);
                 }
             });
+    }
+
+
+    //Take data returned from Marvel's image data & build full URL string
+    createImageLink(image) {
+        const imageURL = image.path;
+        const imageType = image.extension;
+        const imageSize = 'portrait_uncanny';
+        const fullURL = `${imageURL}/${imageSize}.${imageType}`;
+
+        this.setState({
+            imageLink: fullURL
+        })
     }
 
     //Return random joke from joke API
@@ -88,6 +110,7 @@ class GetJokes extends React.Component {
     }
 
 
+    //Search bar handling
     handleSubmit(e) {
         e.preventDefault();
         const characterSearch = Array.from(this.state.search);
@@ -111,6 +134,7 @@ class GetJokes extends React.Component {
         });
     }
 
+    //Sets state for colour picker package, allowing colour to update on user input
     handleChangeComplete (color) {
         console.log(color);
         this.setState({ 
@@ -118,39 +142,23 @@ class GetJokes extends React.Component {
         });
     };
 
-
-
-    //Take data returned from Marvel's image data & build full URL string
-    createImageLink(image) {
-        const imageURL = image.path;
-        const imageType = image.extension;
-        const imageSize = 'portrait_uncanny';
-        const fullURL = `${imageURL}/${imageSize}.${imageType}`;
-
-        this.setState({
-            imageLink: fullURL
-        })
-    }
-
     render() {
         return (
             <main className='joke-design'>
                 <div className="wrapper">
-                    <form action="" onSubmit={this.handleSubmit}>
-                        <label htmlFor="search">Enter a Marvel character!</label>
-                        <input type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Enter character name" />
-                        <input type="submit" value="Give me a joke!" />
-                    </form>
+                    <SearchBar 
+                        onSubmit={this.handleSubmit}
+                        onChange={this.handleChange}
+                        value={this.state.search}
+                        />
                     <div className="joke-container">
-                        <div style={{ background: `${this.state.background}` }} className="joke-card">
-                            <img className="selected-quote" src={this.state.selectedQuote} alt="" />
-                            <div className="img-container">
-                                <img src={this.state.imageLink} alt="" />
-                            </div>
-                            <div className="joke-display">
-                                <p className="apply-font">{this.state.joke}</p>
-                            </div>
-                        </div>
+                        <JokeCard 
+                            chosenColour={this.state.background}
+                            selectedQuote={this.state.selectedQuote}
+                            imageLink={this.state.imageLink}
+                            joke={this.state.joke}
+                            altInfo={this.state.altInfo}
+                        />
                         <div className="sidebar">
                             <div className="font-container">
                                 <FontPicker

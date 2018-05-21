@@ -47,12 +47,20 @@ form {
     label {        
         font-size: 20px;
         background: $primaryBold;
+        @media (max-width: 610px) {
+            flex-grow: 1;
+            border-bottom: none;
+            border-right: 2px solid $textLight;
+        }
     }
     input[type=text] {
         flex-grow: 1;
         @media (max-width:743px) {
             border-right: 2px solid $textLight;
         }   
+        @media (max-width: 610px) {
+            flex-basis: 578px;
+        }
     }
     input[type=submit] {
         @media (max-width: 743px) {
@@ -262,8 +270,12 @@ form {
 footer {
     font-size: 1.4rem;
     text-align: center;
+    padding: 5px 0;
     a {
         text-decoration: none;
-        color: $primaryBold;
+        color: darken($primaryBold, 10);
+        &:hover {
+            color: $primaryBold;
+        }
     }
 }

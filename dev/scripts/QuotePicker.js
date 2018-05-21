@@ -5,7 +5,7 @@ const QuotePicker = (props) => {
         const onQuoteSelect = props.onQuoteSelect;
         return (
             <li key={i} onClick={() => onQuoteSelect(quoteBubble)}>
-                <img src={quoteBubble} alt=""/>
+                <img src={quoteBubble} alt="A photo frame"/>
             </li>
        );
     });
